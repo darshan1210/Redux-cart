@@ -1,0 +1,20 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.main_container{
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    .app{
+        width: 375px;
+        height: 95vh;
+        border: 2px solid red;
+        background-color: white;
+    }
+}

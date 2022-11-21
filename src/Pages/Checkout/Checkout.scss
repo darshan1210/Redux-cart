@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+
+$Bold_font: 'Poppins', sans-serif;
+$light_font: 'Nunito Sans', sans-serif;
+$dark_yellow: #fcd404;
+$light_yellow: #f8db45;
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main_container {
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+
+
+    .app {
+        width: 300px;
+        height: 98vh;
+        border: 2px solid red;
+        background-color: white;
+        position: relative;
+
+
+        .header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px 15px 10px 10px;
+            .back_icon{
+                font-family: $Bold_font;
+                font-size: 1.8rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .page_heading{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: $Bold_font;
+                font-size: .95em;
+            }
+            .three_dot{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: $Bold_font;
+                font-size: 1.5rem
+            }
+        }
+
+        .Checkout_page_title{
+            font-family: $Bold_font;
+            font-size: .8rem;
+            margin: 13px 15px 0 10px;
+        }
+        .Checkout_page_discription{
+            font-family: $light_font;
+            font-size: .8rem;
+            margin: 5px 15px 0 10px;
+        }
+
+    }
+}

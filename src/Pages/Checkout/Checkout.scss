@@ -29,18 +29,18 @@ body {
         background-color: white;
         position: relative;
 
-
-        .header{
+        .main{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin: 10px 15px 10px 10px;
+            margin: 10px 15px 5px 10px;
             .back_icon{
                 font-family: $Bold_font;
                 font-size: 1.8rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                cursor: pointer;
             }
             .page_heading{
                 display: flex;
@@ -54,20 +54,101 @@ body {
                 justify-content: center;
                 align-items: center;
                 font-family: $Bold_font;
-                font-size: 1.5rem
+                font-size: 1.5rem;
+                cursor: pointer;
             }
         }
 
         .Checkout_page_title{
             font-family: $Bold_font;
             font-size: .8rem;
-            margin: 13px 15px 0 10px;
+            margin: 0px 15px 0 10px;
         }
         .Checkout_page_discription{
             font-family: $light_font;
             font-size: .8rem;
-            margin: 5px 15px 0 10px;
+            margin: 1px 15px 0 10px;
         }
-
+        .cart_items{
+            margin: 15px 10px 10px 10px;
+            .item_title{
+                font-family: $Bold_font;
+            }
+            .items{
+                display: flex;
+                flex-direction:row;
+                justify-content: space-between;
+                .item_left{
+                    line-height: 17px;
+                    margin-bottom: 5px;
+                    .item_left_up{
+                        font-family: $Bold_font;
+                        font-size: .8em;
+                    }
+                    .item_left_down{
+                        font-family: $light_font;
+                    }
+                }
+                .item_right{
+                    font-family: $Bold_font;
+                    font-size: .9em;
+                    margin-right: 5px;
+                }
+            }
+        }
+        .hr_line{
+            height: 3px;
+            margin: 0 5px 0 5px;
+            background:lightgrey;
+        }
+        .add_notes{
+            margin: 10px 15px 10px 15px;
+            .add_notes_title{
+                font-family: $Bold_font;
+            }
+            .add_notes_box{
+                border: 3px solid $dark_yellow;
+                border-radius: 10px;
+                width: 80%;
+                height: 85px;
+                margin-bottom: 10px;
+            }
+        }
+        .Table_number{
+            font-family: $Bold_font;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            .Table_number_title{
+                font-size: 1.5rem;
+                margin-right: 20px;
+            }
+            .table_number{
+                border: 3px solid $dark_yellow;
+                border-radius: 10px;
+                padding: 5px 10px 5px 10px;
+                font-size: 1.8em;
+                margin-right: 10px;
+            }
+        }
+        .Confirm_order{
+            background: $dark_yellow;
+            position:absolute;
+            bottom: 0;
+            width: 100%;
+            height: 11vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: $Bold_font;
+            font-size: .9em;
+            cursor: pointer;
+            .Confirm_order_title{
+                text-transform: uppercase;
+            }
+        }
     }
 }

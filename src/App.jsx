@@ -1,13 +1,17 @@
 import React from 'react'
-// import Checkout from './Pages/Checkout'
+import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import Checkout from './Pages/Checkout'
 import Product from './Pages/Products'
 
 function App () {
   return (
-    <>
-<Product/>
-{/* <Checkout/> */}
-    </>
+    <BrowserRouter>
+    <Routes>
+    <Route path='/' element={<Product /> } />
+    <Route path='/checkout' element={<Checkout /> } />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 

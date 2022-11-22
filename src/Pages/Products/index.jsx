@@ -4,15 +4,18 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '../../Shared/Redux/Action/Action'
 import './Products.scss'
 import Mainapi from '../../Shared/Utils/Utils'
+import PopUp from '../../Shared/Componet/popup-box'
+import { useNavigate } from 'react-router-dom'
 
 function Product () {
   const [categories, SetCategories] = useState([])
   const [products, SetProducts] = useState([])
   const [secondParent, setSecondparant] = useState([])
   const [secondBtn, setSecondBtn] = useState([])
-  const [defultclick, SetDefultclick] = useState([])
-
+  const [pupupflag, setPopupflag] = useState(false)
+  const [pupUpData, setPopUpData] = useState({})
   const dispatch = useDispatch()
+  const naviagte = useNavigate()
 
   useEffect(() => {
     Mainapi.get('Categories').then((res) => SetCategories(res.data))
@@ -30,6 +33,11 @@ function Product () {
     Firstclick(2)
     Secondclick(4)
   }, [categories, products])
+
+  function popupdata (data) {
+    setPopUpData(data)
+    setPopupflag(!pupupflag)
+  }
   return (
     <div className='main_container'>
       <div className="app">
@@ -52,12 +60,11 @@ function Product () {
           }
         </div>
         <div>
-
           {
             secondBtn.map((element, index) => {
               const { name, description, price } = element
               return (
-                <div className="product_info" key={index} onClick={() => dispatch(addToCart(element))}>
+                <div className="product_info" key={index} onClick={() => popupdata(element)}>
                   <div className="product_info_left">
                     <span className="product_title">{name}</span>
                     <span className="product_Discription">{description}</span>
@@ -71,43 +78,14 @@ function Product () {
           }
         </div>
 
-        <div className="view_basket">
+        <div className="view_basket" onClick={() => naviagte('/checkout')}>
           <div className="view_basket_title">view basket</div>
           <span className="count_basket_view">
             $12.60 / 3 ITEM
           </span>
         </div>
 
-        <div className="popup">
-          <div className="add_to_order">
-            <div className="item_details_title">
-              Carlsberg
-            </div>
-
-            <div className="hr_line"></div>
-
-            <div className="Size_box">
-              <div className="size_title">
-                Size
-              </div>
-              <div className="Half_print">
-                <div className="Half_print_left">Half Print</div>
-                <div className="Half_print_right">$4.20</div>
-              </div>
-              <div className="print">
-                <div className="print_left">Half Print</div>
-                <div className="print_right">$4.20</div>
-              </div>
-            </div>
-
-            <div className="hr_line"></div>
-<div className="Select_Options">
-  <div className="Select_Options_title">
-    Select Options
-  </div>
-</div>
-          </div>
-        </div>
+        {(pupupflag) && <PopUp flag={popupdata} data={pupUpData} />}
 
       </div>
     </div>

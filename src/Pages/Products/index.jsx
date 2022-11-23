@@ -1,38 +1,51 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addToCart } from '../../Shared/Redux/Action/Action'
 import './Products.scss'
 import Mainapi from '../../Shared/Utils/Utils'
 import PopUp from '../../Shared/Componet/popup-box'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Product () {
   const [categories, SetCategories] = useState([])
   const [products, SetProducts] = useState([])
   const [secondParent, setSecondparant] = useState([])
-  const [secondBtn, setSecondBtn] = useState([])
+  const [secondBtnData, setSecondBtnData] = useState([])
   const [pupupflag, setPopupflag] = useState(false)
   const [pupUpData, setPopUpData] = useState({})
-  const dispatch = useDispatch()
+  const [defultItems, setdefultItems] = useState({})
+  const [firstbtnStyle, setFirstBtnStyle] = useState('food_type_btn')
+  const [btnTitle, setBtnTitle] = useState()
+  const gettotal = useSelector((state) => state.cartItems.totalQnty)
+  const getTotalPrize = useSelector((state) => state.cartItems.totalPrize)
+
   const naviagte = useNavigate()
 
   useEffect(() => {
     Mainapi.get('Categories').then((res) => SetCategories(res.data))
     Mainapi.get('User').then((res) => SetProducts(res.data))
   }, [])
-  function Firstclick (id) {
-    const newtemp = categories.filter((element) => element.parent === id)
-    setSecondparant(newtemp)
+  function Firstclick (id, name) {
+    const newtemp1 = categories.filter((element) => element.parent === id)
+    setSecondparant(newtemp1)
+    setdefultItems(newtemp1[0])
+    setBtnTitle(name)
   }
-  function Secondclick (id) {
-    const newtemp2 = products.filter((element) => element.parentId === id)
-    setSecondBtn(newtemp2)
+  function Secondclick (ids) {
+    const newtemp2 = products.filter((element) => element.parentId === ids)
+    setSecondBtnData(newtemp2)
   }
   useEffect(() => {
     Firstclick(2)
     Secondclick(4)
   }, [categories, products])
+
+  useEffect(() => {
+    if (defultItems) {
+      const newnew = defultItems.id
+      Secondclick(newnew)
+    }
+  }, [secondParent])
 
   function popupdata (data) {
     setPopUpData(data)
@@ -48,7 +61,7 @@ function Product () {
         <div className="food_type">
           {categories.map((element, index) => {
             const { id, name } = element
-            return ((element.parent == null) && <button key={index} onClick={() => Firstclick(id)} className='food_type_btn'>{name}</button>)
+            return ((element.parent == null) && <button key={index} onClick={() => Firstclick(id, name)} className={firstbtnStyle}>{name}</button>)
           })}
         </div>
         <div className="stater_type">
@@ -61,7 +74,7 @@ function Product () {
         </div>
         <div>
           {
-            secondBtn.map((element, index) => {
+            secondBtnData.map((element, index) => {
               const { name, description, price } = element
               return (
                 <div className="product_info" key={index} onClick={() => popupdata(element)}>
@@ -78,10 +91,10 @@ function Product () {
           }
         </div>
 
-        <div className="view_basket" onClick={() => naviagte('/checkout')}>
+        <div className="view_basket" onClick={() => { naviagte('/checkout') }}>
           <div className="view_basket_title">view basket</div>
           <span className="count_basket_view">
-            $12.60 / 3 ITEM
+            ${getTotalPrize} / {gettotal} ITEM
           </span>
         </div>
 

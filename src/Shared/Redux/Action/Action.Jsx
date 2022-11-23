@@ -1,9 +1,12 @@
 import { ADD_TO_CART } from './Action_type'
 
-export const addToCart = (data) => {
-  console.log(data)
+export const AddToCart = (data, count, printData) => {
+  console.log(printData)
   return {
     type: ADD_TO_CART,
-    data
+    payload: data,
+    count,
+    printData
+
   }
 }

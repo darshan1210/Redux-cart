@@ -16,9 +16,6 @@ function Product () {
   const [defultItems, setdefultItems] = useState({})
   const [firstbtnStyle, setFirstBtnStyle] = useState('food_type_btn')
   const [btnTitle, setBtnTitle] = useState()
-  const gettotal = useSelector((state) => state.cartItems.totalQnty)
-  const getTotalPrize = useSelector((state) => state.cartItems.totalPrize)
-
   const naviagte = useNavigate()
 
   useEffect(() => {
@@ -94,11 +91,11 @@ function Product () {
         <div className="view_basket" onClick={() => { naviagte('/checkout') }}>
           <div className="view_basket_title">view basket</div>
           <span className="count_basket_view">
-            ${getTotalPrize} / {gettotal} ITEM
+            ${0} / 0 ITEM
           </span>
         </div>
 
-        {(pupupflag) && <PopUp flag={popupdata} data={pupUpData} />}
+        {(pupupflag) && <PopUp flag={popupdata} data={pupUpData} checkParent={categories}/>}
 
       </div>
     </div>

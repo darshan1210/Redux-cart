@@ -3,12 +3,12 @@
 import React, { useState } from 'react'
 import { AddToCart } from '../../Redux/Action/Action'
 import '../../../Pages/Products/Products.scss'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { element } from 'prop-types'
 
-function PopUp ({ flag, data }) {
+function PopUp ({ flag, data, checkParent }) {
   const [count, setCount] = useState(1)
   const { name, variants, extras, price } = data
-  const [printcout, SetPrintcout] = useState(price)
   const [checkdata, setCheckData] = useState([])
   const [printData, setPrintData] = useState('')
   const dispatch = useDispatch()
@@ -21,14 +21,15 @@ function PopUp ({ flag, data }) {
     } else {
       const newdata = checkdata.filter((element) => element !== (temp))
       setCheckData(newdata)
-      console.log(newdata)
     }
   }
 
-  function getPrint (name, prize) {
-    setPrintData(name)
-    SetPrintcout(prize)
+  function addData (data) {
+    const findparentid = checkParent.filter((element) => element.id === data.parentId)
+    const perantName = checkParent.filter((element) => element.id === findparentid[0].parent)
+    dispatch(AddToCart(perantName[0].id, perantName[0].name), count, printData, checkdata, data)
   }
+
   return (
 
         <>
@@ -52,7 +53,7 @@ function PopUp ({ flag, data }) {
                                     {variants.map((element, index) => {
                                       const { name, price } = element
                                       return (
-                                            <div className="Half_print" key={index} onClick={() => getPrint(name, price)}>
+                                            <div className="Half_print" key={index} onClick={() => setPrintData(element)}>
                                                 <div className="Half_print_left">{name}</div>
                                                 <div className="Half_print_right">${price}</div>
                                             </div>
@@ -96,7 +97,7 @@ function PopUp ({ flag, data }) {
                         <button className="plus" onClick={() => setCount(count + 1)}>+</button>
                     </div>
                     <div className="addtocart">
-                        <button className="ADD_TO_ORDER" onClick={() => dispatch(AddToCart(data, count, printData))}>ADD TO ORDER</button>
+                        <button className="ADD_TO_ORDER" onClick={() => addData(data)}>ADD TO ORDER</button>
                     </div>
 
                 </div>

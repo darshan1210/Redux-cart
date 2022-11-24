@@ -16,15 +16,14 @@ export default function cartItems (state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return {
-        ...state,
-        mainData: [...state.mainData, {
+        mainData: [{
           id: action.Id,
           name: action.foodType,
-          items: [...state.mainData.items, {
+          items: [{
             count: action.Count,
             print: action.printType,
             extraitems: action.extraItems,
-            itemData: action.payload
+            itemData: action.Payload
           }]
         }]
       }

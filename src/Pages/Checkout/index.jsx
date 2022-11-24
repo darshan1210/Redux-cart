@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux'
 
 function Checkout () {
   const naviagte = useNavigate()
-
+  const mainData = useSelector((state) => state.cartItems.mainData)
+  // console.log(mainData)
   return (
     <>
       <div className='main_container'>

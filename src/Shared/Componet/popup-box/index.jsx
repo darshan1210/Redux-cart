@@ -11,6 +11,8 @@ function PopUp ({ flag, data, checkParent }) {
   const { name, variants, extras, price } = data
   const [checkdata, setCheckData] = useState([])
   const [printData, setPrintData] = useState('')
+  const mainData = useSelector((state) => state.cartItems.mainData)
+
   const dispatch = useDispatch()
 
   function hendelchange (e) {
@@ -25,9 +27,35 @@ function PopUp ({ flag, data, checkParent }) {
   }
 
   function addData (data) {
+    console.log(count)
     const findparentid = checkParent.filter((element) => element.id === data.parentId)
     const perantName = checkParent.filter((element) => element.id === findparentid[0].parent)
-    dispatch(AddToCart(perantName[0].id, perantName[0].name), count, printData, checkdata, data)
+    // first checkfoodtype.....
+    const checkFoodtype = mainData.filter((e) => e.id === perantName[0].id)
+
+    if (checkFoodtype.length === 0) {
+      dispatch(AddToCart(perantName[0].id, perantName[0].name, count, printData, checkdata, data))
+    } else {
+      // checkitems....start...
+      const checkItem = mainData.map((element) => {
+        const temp = element.items.map((element) => {
+          if (element.itemData.id === checkFoodtype[0].items[0].itemData.id && element.print.price === checkFoodtype[0].items[0].print.price) {
+            console.log('done')
+          }
+          return 'temp'
+        })
+        return temp
+      })
+
+      // checkitems....end...
+    //   past ..............................................
+    //   checkFoodtype[0].items.push({
+    //     count,
+    //     print: printData,
+    //     extraitems: checkdata,
+    //     itemData: data
+    //   })
+    }
   }
 
   return (
@@ -90,9 +118,7 @@ function PopUp ({ flag, data, checkParent }) {
                     </>
 
                     <div className="item_add_one">
-                        <button className="minus" onClick={() => {
-                          (count > 1) && setCount(count - 1)
-                        }}>-</button>
+                        <button className="minus" onClick={() => { (count > 1) && setCount(count - 1) }}>-</button>
                         <div className="total_items">{count}</div>
                         <button className="plus" onClick={() => setCount(count + 1)}>+</button>
                     </div>

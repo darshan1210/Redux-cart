@@ -10,13 +10,15 @@ const initialState = {
       extraitems: [],
       itemData: {}
     }]
-  }]
+  }],
+  totalPrize: 0,
+  totalCount: 0
 }
 export default function cartItems (state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return {
-        mainData: [{
+        mainData: [...state.mainData, {
           id: action.Id,
           name: action.foodType,
           items: [{

@@ -1,6 +1,7 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Checkout.scss'
 import { FiChevronLeft } from 'react-icons/fi'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
@@ -10,7 +11,20 @@ import { useSelector } from 'react-redux'
 function Checkout () {
   const naviagte = useNavigate()
   const mainData = useSelector((state) => state.cartItems.mainData)
-  // console.log(mainData)
+  const [totalPrice, setTotalPrice] = useState(0)
+
+  useEffect(() => {
+    let sum = 0
+    const totalPrice = mainData.map((element) => {
+      // console.log(element.items)
+      const total = element.items.map((element) =>
+        element.itemData.price
+      )
+      return total
+    })
+    console.log(totalPrice)
+  }, [])
+
   return (
     <>
       <div className='main_container'>
@@ -34,19 +48,38 @@ function Checkout () {
           <div className="Checkout_page_discription">
             134 High Street, Kempston, Bedford, <br />Bedfordshire, MK42 7BN
           </div>
-          <div className="cart_items">
-          <div className="item_title">
-                   Drinks(3)
-                  </div>
-                  <div className="items" >
-                  <div className="item_left">
-                    <span className="item_left_up">2 x item name</span>
-                    <div className="item_left_down">Extraitems</div>
-                  </div>
-                  <div className="item_right">$12.1</div>
-               </div>
 
+          <div className="cart_items">
+            {
+              mainData.map((element, index) => {
+                const { name, items } = element
+                if (name !== '') {
+                  return (
+                    <div key={index}>
+                      <div className="item_title" key={index + 1}>
+                        {name}(3)
+                      </div>
+                      <>
+                        {items.map((element, index) => {
+                          const { count, extraitems, itemData, print } = element
+                          return (
+                            <div className="items" key={index}>
+                              <div className="item_left">
+                                <span className="item_left_up">{count} x {itemData.name}</span>
+                                <div className="item_left_down">{extraitems.toString()} {print.name}</div>
+                              </div>
+                              <div className="item_right">${itemData.price * count}</div>
+                            </div>
+                          )
+                        })}
+                      </>
+                    </div>
+                  )
+                }
+              })
+            }
           </div>
+
           <div className="hr_line"></div>
 
           <div className="add_notes">
@@ -72,7 +105,7 @@ function Checkout () {
             </span>
           </div>
 
-          {/* <div className="confirm_order">
+          {/* <div className="confirm_order_page">
           <div className="main_confirm_order">
             <div className="confirm_order_title">Confirm Order</div>
           </div>

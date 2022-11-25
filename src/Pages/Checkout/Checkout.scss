@@ -24,17 +24,18 @@ body {
 
     .app {
         width: 300px;
-        height: 98vh;
+        height: 550px;
         border: 2px solid red;
         background-color: white;
         position: relative;
 
-        .main{
+        .main {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin: 10px 15px 5px 10px;
-            .back_icon{
+            margin: 15px 20px 7px 10px;
+
+            .back_icon {
                 font-family: $Bold_font;
                 font-size: 1.8rem;
                 display: flex;
@@ -42,14 +43,16 @@ body {
                 align-items: center;
                 cursor: pointer;
             }
-            .page_heading{
+
+            .page_heading {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 font-family: $Bold_font;
                 font-size: .95em;
             }
-            .three_dot{
+
+            .three_dot {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -59,54 +62,66 @@ body {
             }
         }
 
-        .Checkout_page_title{
+        .Checkout_page_title {
             font-family: $Bold_font;
-            font-size: .8rem;
-            margin: 0px 15px 0 10px;
+            font-size: .7rem;
+            margin: 0px 20px 0 20px;
         }
-        .Checkout_page_discription{
+
+        .Checkout_page_discription {
             font-family: $light_font;
-            font-size: .8rem;
-            margin: 1px 15px 0 10px;
+            font-size: .7rem;
+            margin: 1px 20px 0 20px;
         }
-        .cart_items{
-            margin: 15px 10px 10px 10px;
-            .item_title{
+
+        .cart_items {
+            margin: 15px 20px 10px 20px;
+
+            .item_title {
                 font-family: $Bold_font;
             }
-            .items{
+
+            .items {
                 display: flex;
-                flex-direction:row;
+                flex-direction: row;
                 justify-content: space-between;
-                .item_left{
+
+                .item_left {
                     line-height: 17px;
                     margin-bottom: 5px;
-                    .item_left_up{
+
+                    .item_left_up {
                         font-family: $Bold_font;
                         font-size: .8em;
                     }
-                    .item_left_down{
+
+                    .item_left_down {
                         font-family: $light_font;
                     }
                 }
-                .item_right{
+
+                .item_right {
                     font-family: $Bold_font;
                     font-size: .9em;
                     margin-right: 5px;
                 }
             }
         }
-        .hr_line{
+
+        .hr_line {
             height: 3px;
-            margin: 0 5px 0 5px;
-            background:lightgrey;
+            margin: 0 10px 0 10px;
+            background: lightgrey;
         }
-        .add_notes{
+
+        .add_notes {
             margin: 10px 15px 10px 15px;
-            .add_notes_title{
+
+            .add_notes_title {
                 font-family: $Bold_font;
             }
-            .add_notes_box{
+
+            .add_notes_box {
                 border: 3px solid $dark_yellow;
                 border-radius: 10px;
                 width: 80%;
@@ -114,18 +129,21 @@ body {
                 margin-bottom: 10px;
             }
         }
-        .Table_number{
+
+        .Table_number {
             font-family: $Bold_font;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             height: 100px;
-            .Table_number_title{
+
+            .Table_number_title {
                 font-size: 1.5rem;
                 margin-right: 20px;
             }
-            .table_number{
+
+            .table_number {
                 border: 3px solid $dark_yellow;
                 border-radius: 10px;
                 padding: 5px 10px 5px 10px;
@@ -133,9 +151,10 @@ body {
                 margin-right: 10px;
             }
         }
-        .Confirm_order{
+
+        .Confirm_order {
             background: $dark_yellow;
-            position:absolute;
+            position: absolute;
             bottom: 0;
             width: 100%;
             height: 11vh;
@@ -146,9 +165,34 @@ body {
             font-family: $Bold_font;
             font-size: .9em;
             cursor: pointer;
-            .Confirm_order_title{
+
+            .Confirm_order_title {
                 text-transform: uppercase;
             }
+        }
+
+        .confirm_order_page {
+            position: absolute;
+            top:0;
+            background-color: rgba(0, 0, 0, 0.613);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .main_confirm_order{
+                background-color: white;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .main_container {
+
+        .app {
+            width: 100vw;
+            height: 100vh;
         }
     }
 }

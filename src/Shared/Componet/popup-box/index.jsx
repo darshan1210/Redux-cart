@@ -1,16 +1,17 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { AddToCart } from '../../Redux/Action/Action'
 import '../../../Pages/Products/Products.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { element } from 'prop-types'
 
 function PopUp ({ flag, data, checkParent }) {
   const [count, setCount] = useState(1)
   const { name, variants, extras, price } = data
   const [checkdata, setCheckData] = useState([])
   const [printData, setPrintData] = useState('')
+
   const mainData = useSelector((state) => state.cartItems.mainData)
 
   const dispatch = useDispatch()
@@ -27,34 +28,29 @@ function PopUp ({ flag, data, checkParent }) {
   }
 
   function addData (data) {
-    console.log(count)
+    // console.log(count)
     const findparentid = checkParent.filter((element) => element.id === data.parentId)
     const perantName = checkParent.filter((element) => element.id === findparentid[0].parent)
     // first checkfoodtype.....
     const checkFoodtype = mainData.filter((e) => e.id === perantName[0].id)
+    const i = mainData.findIndex((e) => e.id === perantName[0].id)
 
     if (checkFoodtype.length === 0) {
       dispatch(AddToCart(perantName[0].id, perantName[0].name, count, printData, checkdata, data))
     } else {
-      // checkitems....start...
-      const checkItem = mainData.map((element) => {
-        const temp = element.items.map((element) => {
-          if (element.itemData.id === checkFoodtype[0].items[0].itemData.id && element.print.price === checkFoodtype[0].items[0].print.price) {
-            console.log('done')
-          }
-          return 'temp'
+      for (let j = 0; j < mainData[i].items.length; j++) {
+        if (mainData[i].items[j].itemData.id === data.id && mainData[i].items[j].print.price === printData.price && JSON.stringify(mainData[i].items[j].extraitems) === JSON.stringify(checkdata)) {
+          mainData[i].items[j].count += 1
+          console.log(mainData[i])
+          return mainData
+        }
+        mainData[i].items.push({
+          count,
+          print: printData,
+          extraitems: checkdata,
+          itemData: data
         })
-        return temp
-      })
-
-      // checkitems....end...
-    //   past ..............................................
-    //   checkFoodtype[0].items.push({
-    //     count,
-    //     print: printData,
-    //     extraitems: checkdata,
-    //     itemData: data
-    //   })
+      }
     }
   }
 

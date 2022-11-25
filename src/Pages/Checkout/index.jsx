@@ -7,11 +7,13 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Confirm from '../../Shared/Componet/Confim-Order-box'
 
 function Checkout () {
   const naviagte = useNavigate()
   const mainData = useSelector((state) => state.cartItems.mainData)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [orderFlag, setOrderFlag] = useState(false)
 
   useEffect(() => {
     let sum = 0
@@ -24,7 +26,9 @@ function Checkout () {
     })
     console.log(totalPrice)
   }, [])
-
+  function ConfirmOrder () {
+    setOrderFlag(!orderFlag)
+  }
   return (
     <>
       <div className='main_container'>
@@ -98,18 +102,14 @@ function Checkout () {
             </div>
           </div>
 
-          <div className="Confirm_order" >
+          <div className="Confirm_order" onClick={() => ConfirmOrder()}>
             <div className="Confirm_order_title">confirm order</div>
             <span className="Confirm_order_view">
               $0 / 0 ITEM
             </span>
           </div>
+          {(orderFlag) && <Confirm flag={ConfirmOrder}/>}
 
-          {/* <div className="confirm_order_page">
-          <div className="main_confirm_order">
-            <div className="confirm_order_title">Confirm Order</div>
-          </div>
-        </div> */}
         </div>
       </div>
     </>

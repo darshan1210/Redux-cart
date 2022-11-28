@@ -4,6 +4,10 @@ import '../../../Pages/Checkout/Checkout.scss'
 import thumb from '../../../assets/img/thumbs_up.png'
 
 function Confirm ({ flag }) {
+  const reloadPage = () => {
+    window.location.reload()
+    flag()
+  }
   return (
         <>
             <div className="confirm_order_page">
@@ -15,7 +19,7 @@ function Confirm ({ flag }) {
             </div>
             <div className="final_btns">
                 <button className="cancel_btn" onClick={flag}>cancel</button>
-                <button className="place_order" onClick={flag}>place order</button>
+                <button className="place_order" onClick={reloadPage}>place order</button>
             </div>
           </div>
         </div>

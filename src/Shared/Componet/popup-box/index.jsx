@@ -71,8 +71,8 @@ function PopUp ({ flag, data, checkParent }) {
 
   return (
 
-        <>
-            <div className="popup" >
+        <div className='popup_back'>
+            <div className="popup">
                 <div className="close_div" onClick={flag}>
 
                 </div>
@@ -94,7 +94,7 @@ function PopUp ({ flag, data, checkParent }) {
                                       return (
                                             <div className="Half_print" key={index} onClick={() => setPrintData(element)}>
                                                 <div className="Half_print_left">{name}</div>
-                                                <div className="Half_print_right">${price}</div>
+                                                <div className="Half_print_right">£ {price}</div>
                                             </div>
                                       )
                                     })}
@@ -116,8 +116,8 @@ function PopUp ({ flag, data, checkParent }) {
                                           const { name, price } = element
                                           return (
                                                 <div className="extra_items" key={index}>
-                                                    <div className="extra_items_title">{name} <span className="extra_items_prize">(+$ {price})</span></div>
-                                                    <input type="checkbox" name={name} value={name} onChange={(e) => hendelchange(e)}/>
+                                                    <div className="extra_items_title"><label htmlFor='checkid' className='container' >{name}  <span className="checkmark"></span></label><span className="extra_items_prize">(+£ {price})</span></div>
+                                                    <input type="checkbox" name={name} value={name} className="checkbox-custom" id="checkid" onChange={(e) => hendelchange(e)}/>
                                                 </div>
                                           )
                                         })
@@ -138,8 +138,9 @@ function PopUp ({ flag, data, checkParent }) {
                     </div>
 
                 </div>
+
             </div>
-        </>
+        </div>
   )
 }
 export default PopUp

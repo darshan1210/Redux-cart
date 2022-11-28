@@ -21,9 +21,6 @@ function Checkout () {
   const cartItems = useSelector(state => state.cartItems.data)
   console.log(cartItems)
 
-  const [variantName, setVariantName] = useState()
-  const [extrasName, setExtrasName] = useState()
-
   function ConfirmOrder () {
     setOrderFlag(!orderFlag)
   }
@@ -69,22 +66,15 @@ function Checkout () {
                   {
                     cartItems[index].itemsmenu?.map((data, index) => {
                       const { name, count, variants, extras, itemsum } = data
-                      useEffect(() => {
-                        (variants?.name)
-                          ? setVariantName(variants?.name.charAt(0).toUpperCase() + variants?.name.slice(1))
-                          : setVariantName('');
-                        (extras)
-                          ? setExtrasName(extras?.map(ex => (ex.name.charAt(0).toUpperCase() + ex.name.slice(1) + ' ')))
-                          : setExtrasName('')
-                      }, [])
+                      const temp = extras.map((e) => e.name)
 
                       return (
                         <div className="items" key={index}>
                              <div className="item_left">
                              <span className="item_left_up">{count} x {name}</span>
-                             {(variantName || extrasName) ? <div className='item_left_down'>{variantName} {extrasName}</div> : <span className='noData'></span>}
+                             {(variants || temp) ? <div className='item_left_down'>{variants.name} - {temp.toString()}</div> : <span className='noData'></span>}
                               </div>
-                              <div className="item_right">${itemsum.toFixed(2)}</div>
+                              <div className="item_right">£{itemsum.toFixed(2)}</div>
                         </div>
                       )
                     }
@@ -119,7 +109,7 @@ function Checkout () {
           <div className="Confirm_order" onClick={() => ConfirmOrder()}>
             <div className="Confirm_order_title">confirm order</div>
             <span className="Confirm_order_view">
-              ${totalPrice.toFixed(2)} /  {totalItem} ITEM
+            £ {totalPrice.toFixed(2)} /  {totalItem} ITEM
             </span>
           </div>
           {(orderFlag) && <Confirm flag={ConfirmOrder} />}

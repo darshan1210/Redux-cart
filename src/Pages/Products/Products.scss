@@ -1,8 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+@font-face {
+    font-family: 'Gilroy-Light';
+    src: local('Gilroy-Light'), url(../../assets/Fonts/Gilroy/Gilroy-Light.otf) format('truetype');
+}
 
-$Bold_font: 'Poppins', sans-serif;
-$light_font: 'Nunito Sans', sans-serif;
+@font-face {
+    font-family: 'Gilroy-ExtraBold';
+    src: local('Gilroy-ExtraBold'), url(../../assets/Fonts/Gilroy/Gilroy-ExtraBold.otf) format('truetype');
+}
+
+$Bold_font: 'Gilroy-ExtraBold', sans-serif;
+$light_font: 'Gilroy-Light', sans-serif;
 $dark_yellow: #fcd404;
 $light_yellow: #f8db45;
 
@@ -23,7 +30,7 @@ body {
 
     .app {
         width: 300px;
-        height: 720px;
+        height: 650px;
         border: 2px solid black;
         background-color: white;
         padding: 0 0px 0 0px;
@@ -39,6 +46,7 @@ body {
                 font-weight: bold;
                 font-family: $Bold_font;
                 font-size: 17px;
+                margin-bottom: 5px;
             }
 
             .Street_address {
@@ -60,14 +68,22 @@ body {
                 font-family: $Bold_font;
                 text-transform: uppercase;
                 border-radius: 13px;
-                margin: 5px 0px 5px 10px ;
+                margin: 5px 0px 5px 10px;
                 padding: 5px 15px 5px 15px;
-                border: 4px solid $dark_yellow;
+                border: 3px solid $dark_yellow;
             }
 
-            :hover {
+            .MainActive {
                 background: $light_yellow;
+                font-family: $Bold_font;
+                text-transform: uppercase;
+                border-radius: 13px;
+                margin: 5px 0px 5px 10px;
+                padding: 5px 15px 5px 15px;
+                border: 3px solid $dark_yellow;
             }
+
+
         }
 
         .stater_type {
@@ -75,20 +91,30 @@ body {
             flex-direction: row;
             align-items: flex-start;
             overflow: auto;
-            width: 300px;
+            width: 90%;
 
             .stater_type_btn {
                 background: white;
                 font-family: $Bold_font;
+                font-size: .9em;
                 padding: 5px 0 5px 0;
                 margin: 5px 0 10px 10px;
-                border: 4px solid white;
-
+                border: 3px solid white;
             }
 
-            :hover {
-                border-bottom: 4px solid $dark_yellow;
+            .MainActiveBtn2 {
+                background: white;
+                font-family: $Bold_font;
+                font-size: .9em;
+                padding: 5px 0 5px 0;
+                margin: 5px 0 10px 10px;
+                border-bottom: 3px solid $dark_yellow;
+                border-top: 3px solid white;
+                border-left: 3px solid white;
+                border-right: 3px solid white;
+                border-radius: 5.5px;
             }
+
 
         }
 
@@ -101,7 +127,7 @@ body {
             justify-content: space-between;
             margin: 0 10px 5px 10px;
             padding: 7px 10px 7px 10px;
-            border: 4px solid $dark_yellow;
+            border: 3px solid $dark_yellow;
             border-radius: 10px;
             cursor: pointer;
 
@@ -140,7 +166,7 @@ body {
             bottom: 0;
             background: $dark_yellow;
             width: 100%;
-            height: 11vh;
+            height: 8vh;
             text-transform: uppercase;
             font-family: $Bold_font;
             display: flex;
@@ -150,115 +176,140 @@ body {
             cursor: pointer;
             font-size: .9em;
         }
-        .popup{
-            // display: none;
+
+        .popup {
             position: absolute;
             top: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.535);
-            .close_div{
-                position: absolute;
-                top:0;
-                background:transparent;
-                height:162px;
+
+            .close_div {
+                top: 0;
+                background: transparent;
+                height: 40%;
                 width: 100%;
-                z-index: 100000;
             }
-            .add_to_order{
+
+            .add_to_order {
                 position: absolute;
                 bottom: 0;
                 background: white;
                 width: 100%;
-                height: 70%;
                 border-radius: 15px 15px 0 0;
-              
+                padding-bottom: 30px;
+                z-index: 100000;
 
-                .item_details_title{
-                   margin:10px 0 10px 20px;
-                   font-family: $Bold_font;
-                   font-size: 1.1rem;
+
+                .item_details_title {
+                    margin: 10px 0 10px 20px;
+                    font-family: $Bold_font;
+                    font-size: 1.3rem;
                 }
-                .hr_line{
+
+                .hr_line {
                     height: 4px;
                     margin: 0 5px 0 5px;
-                    background:lightgrey;
+                    background: rgb(224, 224, 224);
                 }
-                .Size_box{
+
+                .Size_box {
                     margin: 10px 20px 10px 20px;
-                    .size_title{
+
+                    .size_title {
                         font-family: $Bold_font;
-                        font-weight: 1.1rem;
+                        font-size: 1.15rem;
+                        line-height: 30px;
                     }
-                    .Half_print{
-                        border: 4px solid $dark_yellow;
+
+                    .Half_print {
+                        border: 3px solid $dark_yellow;
                         border-radius: 10px;
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
-                        padding: 3px 5px 3px 5px;
+                        padding: 5px 8px 5px 8px;
                         font-family: $Bold_font;
-                        font-size: .9em;
+                        font-size: 1em;
                         margin-bottom: 5px;
-                    }:hover{
-                        background: $light_yellow;
                     }
                 }
-                .Select_Options{
+
+                .Select_Options {
                     margin: 5px 20px 10px 20px;
-                    .Select_Options_title{
+
+                    .Select_Options_title {
                         font-family: $Bold_font;
+                        line-height: 30px;
+                        font-size: 1.1em;
                     }
-                    .extra_items{
+
+                    .extra_items {
                         display: flex;
-                        flex-direction:row;
+                        flex-direction: row;
                         justify-content: space-between;
                         font-family: $Bold_font;
-                        font-size: .9em;
-                        input{
-                            border: 2px solid $dark_yellow;
-                        } 
+                        font-size: 1em;
+                        line-height: 30px;
+
+                        input {
+                            accent-color: $dark_yellow;
+                        }
+
                     }
                 }
-                .item_add_one{
-                    display:flex;
+
+                .item_add_one {
+                    display: flex;
                     flex-direction: row;
                     justify-content: center;
-                    margin:10px 0 10px 0;
-                    .minus{
+                    margin: 10px 0 10px 0;
+                    font-family: $Bold_font;
+
+                    .minus {
                         padding: 5px 10px 5px 10px;
-                        border: 4px solid $dark_yellow;
+                        border: 3px solid $dark_yellow;
                         background: $light_yellow;
                         border-radius: 7px;
+                        font-family: $Bold_font;
+                        font-size: 1.1rem;
                     }
-                    .total_items{
+
+                    .total_items {
                         padding: 5px 10px 5px 10px;
                         margin: 0 10px 0 10px;
-                        border: 4px solid $dark_yellow;
+                        border: 3px solid $dark_yellow;
                         border-radius: 7px;
                     }
-                    .plus{
+
+                    .plus {
                         padding: 5px 10px 5px 10px;
-                        border: 4px solid $dark_yellow;
+                        border: 3px solid $dark_yellow;
                         background: $light_yellow;
                         border-radius: 7px;
-                    }:active{
-                        background: $dark_yellow;
+                        font-family: $Bold_font;
+                        font-size: 1.1rem;
                     }
                 }
-                .addtocart{
+
+                .addtocart {
                     display: flex;
                     justify-content: center;
-                    .ADD_TO_ORDER{
+
+
+                    .ADD_TO_ORDER {
                         padding: 5px 60px 5px 60px;
-                        border: 4px solid $dark_yellow;
+                        border: 3px solid $dark_yellow;
                         background: $light_yellow;
                         border-radius: 7px;
-                    }:active{
+                        font-family: $Bold_font;
+                    }
+
+                    :active {
                         background: $dark_yellow;
                     }
                 }
-                
+
             }
         }
 
@@ -267,12 +318,19 @@ body {
 
 
 
-
 @media screen and (max-width: 450px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
     .main_container {
-    
+        margin: 0;
+        padding: 0;
+
         .app {
             width: 100vw;
             height: 100vh;
-        }}
+        }
+    }
 }

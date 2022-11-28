@@ -1,3 +1,4 @@
 import { combineReducers } from 'redux'
 import cartItems from './Reducer'
-export default combineReducers({ cartItems })
+import TotalBill from './total-bill'
+export default combineReducers({ cartItems, TotalBill })

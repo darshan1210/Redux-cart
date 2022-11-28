@@ -1,57 +1,72 @@
+/* eslint-disable prefer-const */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
-import { AddToCart } from '../../Redux/Action/Action'
+import React, { useEffect, useState } from 'react'
+import { AddToCart, totalBill } from '../../Redux/Action/Action'
 import '../../../Pages/Products/Products.scss'
 import { useDispatch, useSelector } from 'react-redux'
 
 function PopUp ({ flag, data, checkParent }) {
   const [count, setCount] = useState(1)
-  const { name, variants, extras, price } = data
-  const [checkdata, setCheckData] = useState([])
-  const [printData, setPrintData] = useState('')
+  const { name, variants, extras } = data
+  const [selectedcheckdata, setSelectedCheckData] = useState([])
+  const [printData, setPrintData] = useState({})
+  const [orderdata, setOrderData] = useState({})
 
-  const mainData = useSelector((state) => state.cartItems.mainData)
+  const cartData = useSelector(state => state.cartItems.data)
+
+  // const mainData = useSelector((state) => state.cartItems.mainData)
 
   const dispatch = useDispatch()
 
   function hendelchange (e) {
-    const temp = e.target.value
-    const temp1 = e.target.checked
-    if (temp1) {
-      setCheckData([...checkdata, temp])
-    } else {
-      const newdata = checkdata.filter((element) => element !== (temp))
-      setCheckData(newdata)
-    }
+    const { name, checked } = e.target
+    const existedItem = selectedcheckdata.find(item => item.name === name);
+    (!existedItem)
+      ? setExtras(name, checked)
+      : updateExtras(name, checked)
   }
 
-  function addData (data) {
-    // console.log(count)
-    const findparentid = checkParent.filter((element) => element.id === data.parentId)
-    const perantName = checkParent.filter((element) => element.id === findparentid[0].parent)
-    // first checkfoodtype.....
-    const checkFoodtype = mainData.filter((e) => e.id === perantName[0].id)
-    const i = mainData.findIndex((e) => e.id === perantName[0].id)
+  const setExtras = (name) => {
+    const extraObj = data.extras.find(subItem => subItem.name === name)
+    setSelectedCheckData(current => [...current, extraObj])
+  }
+  const updateExtras = (name) => {
+    setSelectedCheckData(current => current.filter(obj => {
+      return obj.name !== name
+    }))
+  }
 
-    if (checkFoodtype.length === 0) {
-      dispatch(AddToCart(perantName[0].id, perantName[0].name, count, printData, checkdata, data))
-    } else {
-      for (let j = 0; j < mainData[i].items.length; j++) {
-        if (mainData[i].items[j].itemData.id === data.id && mainData[i].items[j].print.price === printData.price && JSON.stringify(mainData[i].items[j].extraitems) === JSON.stringify(checkdata)) {
-          mainData[i].items[j].count += 1
-          console.log(mainData[i])
-          return mainData
-        }
-        mainData[i].items.push({
-          count,
-          print: printData,
-          extraitems: checkdata,
-          itemData: data
-        })
-      }
+  useEffect(() => {
+    if (data?.variants) {
+      setPrintData(data.variants[0])
     }
+  }, [])
+
+  useEffect(() => {
+    const findparentid = checkParent.filter((element) => element.id === data.parentId)
+    const mainparent = checkParent.find((element) => element.id === findparentid[0].parent)
+    const perantName = { id: mainparent.id, name: mainparent.name }
+
+    let itemsum = 0;
+    (printData?.price)
+      ? itemsum += printData?.price
+      : itemsum += data.price;
+
+    (selectedcheckdata?.map((element) => element.price)).forEach(element => { itemsum += element })
+    itemsum *= count
+
+    const itemsmenu = []
+    itemsmenu.push({ ...data, extras: [...selectedcheckdata], variants: printData, count, itemsum })
+
+    setOrderData({ ...perantName, totalCount: count, totalSum: itemsum, itemsmenu })
+  }, [selectedcheckdata, count, printData])
+
+  const addToOrder = () => {
+    dispatch(AddToCart(orderdata, cartData))
+    dispatch(totalBill(orderdata.totalSum))
+    flag()
   }
 
   return (
@@ -119,7 +134,7 @@ function PopUp ({ flag, data, checkParent }) {
                         <button className="plus" onClick={() => setCount(count + 1)}>+</button>
                     </div>
                     <div className="addtocart">
-                        <button className="ADD_TO_ORDER" onClick={() => addData(data)}>ADD TO ORDER</button>
+                        <button className="ADD_TO_ORDER" onClick={addToOrder} >ADD TO ORDER</button>
                     </div>
 
                 </div>

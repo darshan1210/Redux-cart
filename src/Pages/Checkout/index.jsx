@@ -19,7 +19,6 @@ function Checkout () {
   const [totalItem, setTotalItem] = useState(0)
 
   const cartItems = useSelector(state => state.cartItems.data)
-  console.log(cartItems)
 
   function ConfirmOrder () {
     setOrderFlag(!orderFlag)
@@ -55,35 +54,38 @@ function Checkout () {
           </div>
 
           <div className="cart_items">
-            {
-              cartItems?.map((data, index) => {
-                return (
-                <div key={index}>
-                  <div className="item_title" key={index}>
-                    {cartItems[index].name}
-                    ({cartItems[index].totalCount})
-                  </div>
-                  {
-                    cartItems[index].itemsmenu?.map((data, index) => {
-                      const { name, count, variants, extras, itemsum } = data
-                      const temp = extras.map((e) => e.name)
+            {(cartItems)
+              ? (cartItems?.map((data, index) => {
+                  return (
+                  <div key={index}>
+                    <div className="item_title" key={index}>
+                      {cartItems[index].name}
+                      ({cartItems[index].totalCount})
+                    </div>
+                    {
+                      cartItems[index].itemsmenu?.map((data, index) => {
+                        const { name, count, variants, extras, itemsum } = data
+                        const temp = extras.map((e) => e.name)
 
-                      return (
-                        <div className="items" key={index}>
-                             <div className="item_left">
-                             <span className="item_left_up">{count} x {name}</span>
-                             {(variants || temp) ? <div className='item_left_down'>{variants.name} - {temp.toString()}</div> : <span className='noData'></span>}
-                              </div>
-                              <div className="item_right">£{itemsum.toFixed(2)}</div>
-                        </div>
+                        return (
+                          <div className="items" key={index}>
+                            <div className="item_left">
+                              <span className="item_left_up">{count} x {name}</span>
+                              {(variants || temp) ? <div className='item_left_down'>{variants.name} - {temp.toString()}</div> : <span className='noData'></span>}
+                            </div>
+                            <div className="item_right">£{itemsum.toFixed(2)}</div>
+                          </div>
+                        )
+                      }
                       )
                     }
-                    )
-                  }
-                </div>
-                )
-              }
-              )
+                  </div>
+                  )
+                }
+                ))
+              : (<div>
+                  <h3>Your Cart is Empty</h3>
+              </div>)
             }
 
           </div>
@@ -109,7 +111,7 @@ function Checkout () {
           <div className="Confirm_order" onClick={() => ConfirmOrder()}>
             <div className="Confirm_order_title">confirm order</div>
             <span className="Confirm_order_view">
-            £ {totalPrice.toFixed(2)} /  {totalItem} ITEM
+              £ {totalPrice.toFixed(2)} /  {totalItem} ITEM
             </span>
           </div>
           {(orderFlag) && <Confirm flag={ConfirmOrder} />}

@@ -86,6 +86,11 @@ body {
         .cart_items {
             margin: 15px 20px 10px 20px;
 
+            .empty_cart{
+                border: 3px solid $dark_yellow;
+                text-align: center;
+            }
+
             .item_title {
                 font-family: $Bold_font;
                 margin-bottom: 5px;

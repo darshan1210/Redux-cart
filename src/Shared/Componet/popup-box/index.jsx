@@ -12,6 +12,7 @@ function PopUp ({ flag, data, checkParent }) {
   const { name, variants, extras } = data
   const [selectedcheckdata, setSelectedCheckData] = useState([])
   const [printData, setPrintData] = useState({})
+  const [active, setActive] = useState('half pint')
   const [orderdata, setOrderData] = useState({})
 
   const cartData = useSelector(state => state.cartItems.data)
@@ -68,6 +69,10 @@ function PopUp ({ flag, data, checkParent }) {
     dispatch(totalBill(orderdata.totalSum))
     flag()
   }
+  function setData (element, name) {
+    setPrintData(element)
+    setActive(name)
+  }
 
   return (
 
@@ -92,7 +97,7 @@ function PopUp ({ flag, data, checkParent }) {
                                     {variants.map((element, index) => {
                                       const { name, price } = element
                                       return (
-                                            <div className="Half_print" key={index} onClick={() => setPrintData(element)}>
+                                            <div className={active === name ? 'MainActiveBtn3' : 'Half_print'} key={index} onClick={() => setData(element, name)}>
                                                 <div className="Half_print_left">{name}</div>
                                                 <div className="Half_print_right">£ {price}</div>
                                             </div>

@@ -39,6 +39,7 @@ function Product () {
     Mainapi.get('Categories').then((res) => SetCategories(res.data))
     Mainapi.get('User').then((res) => SetProducts(res.data))
   }, [])
+
   function Firstclick (id, name) {
     setFirstbtnactive(id)
     const newtemp1 = categories.filter((element) => element.parent === id)

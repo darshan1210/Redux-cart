@@ -233,6 +233,18 @@ body {
                         font-size: 1em;
                         margin-bottom: 5px;
                     }
+                    .MainActiveBtn3{
+                        background: $light_yellow;
+                        border: 3px solid $dark_yellow;
+                        border-radius: 10px;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 5px 8px 5px 8px;
+                        font-family: $Bold_font;
+                        font-size: 1em;
+                        margin-bottom: 5px;
+                    }
                 }
 
                 .Select_Options {

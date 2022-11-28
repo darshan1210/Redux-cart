@@ -83,8 +83,8 @@ function Checkout () {
                   )
                 }
                 ))
-              : (<div>
-                  <h3>Your Cart is Empty</h3>
+              : (<div className='empty_cart'>
+                  <h3 >Your Cart is Empty</h3>
               </div>)
             }
 

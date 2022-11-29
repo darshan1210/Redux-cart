@@ -36,6 +36,7 @@ function Product () {
   }, [totalBill])
 
   useEffect(() => {
+    console.log('Api Called')
     Mainapi.get('Categories').then((res) => SetCategories(res.data))
     Mainapi.get('User').then((res) => SetProducts(res.data))
   }, [])

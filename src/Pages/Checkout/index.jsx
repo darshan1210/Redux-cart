@@ -108,12 +108,15 @@ function Checkout () {
             </div>
           </div>
 
-          <div className="Confirm_order" onClick={() => ConfirmOrder()}>
-            <div className="Confirm_order_title">confirm order</div>
-            <span className="Confirm_order_view">
-              £ {totalPrice.toFixed(2)} /  {totalItem} ITEM
-            </span>
-          </div>
+            {
+              (cartItems) && (<div className="Confirm_order" onClick={() => ConfirmOrder()}>
+              <div className="Confirm_order_title">confirm order</div>
+              <span className="Confirm_order_view">
+                £ {totalPrice.toFixed(2)} /  {totalItem} ITEM
+              </span>
+            </div>)
+            }
+
           {(orderFlag) && <Confirm flag={ConfirmOrder} />}
         </div>
       </div>

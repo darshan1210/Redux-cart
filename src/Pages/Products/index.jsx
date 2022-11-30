@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import './Products.scss'
-import Mainapi from '../../Shared/Utils/Utils'
+// import Mainapi from '../../Shared/Utils/Utils'
 import PopUp from '../../Shared/Componet/popup-box'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-function Product () {
+function Product ({ btndata, allitem }) {
   const [categories, SetCategories] = useState([])
   const [products, SetProducts] = useState([])
   const [secondParent, setSecondparant] = useState([])
@@ -34,9 +35,8 @@ function Product () {
   }, [totalBill])
 
   useEffect(() => {
-    console.log('Api Called')
-    Mainapi.get('Categories').then((res) => SetCategories(res.data))
-    Mainapi.get('User').then((res) => SetProducts(res.data))
+    SetCategories(btndata)
+    SetProducts(allitem)
   }, [])
 
   function Firstclick (id, name) {

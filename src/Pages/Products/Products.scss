@@ -12,23 +12,13 @@ $Bold_font: 'Gilroy-ExtraBold', sans-serif;
 $light_font: 'Gilroy-Light', sans-serif;
 $dark_yellow: #fcd404;
 $light_yellow: #f8db45;
-$checkbox-width: 18px;
 
 
 body {
     margin: 0;
     padding: 0;
 }
-@mixin vh() {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
+
 .main_container {
     background-color: $dark_yellow;
     display: flex;

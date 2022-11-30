@@ -155,6 +155,7 @@ body {
 
             .product_info_right {
                 width: 60px;
+
                 .product_prize {
                     font-family: $Bold_font;
                     font-size: 1.2rem;
@@ -234,7 +235,8 @@ body {
                         font-size: 1em;
                         margin-bottom: 5px;
                     }
-                    .MainActiveBtn3{
+
+                    .MainActiveBtn3 {
                         background: $light_yellow;
                         border: 3px solid $dark_yellow;
                         border-radius: 10px;
@@ -264,7 +266,10 @@ body {
                         font-family: $Bold_font;
                         font-size: 1em;
                         line-height: 30px;
-              
+
+                        input {
+                            accent-color: $light_yellow;
+                        }
                     }
                 }
 

@@ -9,14 +9,10 @@ import Confirm from '../../Shared/Componet/Confim-Order-box'
 function Checkout () {
   const naviagte = useNavigate()
   const [orderFlag, setOrderFlag] = useState(false)
-
   const totalBill = useSelector(state => state.TotalBill.data)
-
   const [totalPrice, setTotalPrice] = useState((totalBill) || 0)
   const [totalItem, setTotalItem] = useState(0)
-
   const cartItems = useSelector(state => state.cartItems.data)
-
   function ConfirmOrder () {
     setOrderFlag(!orderFlag)
   }

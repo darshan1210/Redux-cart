@@ -24,6 +24,7 @@ function Checkout () {
       ? setTotalPrice(totalBill)
       : setTotalPrice(0)
   }, [totalBill])
+  console.log(cartItems)
   return (
     <>
       <div className='main_container'>
@@ -47,7 +48,7 @@ function Checkout () {
           </div>
 
           <div className="cart_items">
-            {(cartItems)
+            {(cartItems !== undefined && cartItems.length !== 0)
               ? (cartItems?.map((data, index) => {
                   return (
                   <div key={index}>
@@ -102,7 +103,7 @@ function Checkout () {
           </div>
 
             {
-              (cartItems) && (<div className="Confirm_order" onClick={() => ConfirmOrder()}>
+              (cartItems !== undefined && cartItems.length !== 0) && (<div className="Confirm_order" onClick={() => ConfirmOrder()}>
               <div className="Confirm_order_title">confirm order</div>
               <span className="Confirm_order_view">
                 £ {totalPrice.toFixed(2)} /  {totalItem} ITEM

@@ -37,7 +37,6 @@ body {
         background-color: white;
         position: relative;
 
-
         .main {
             display: flex;
             flex-direction: row;
@@ -98,7 +97,7 @@ body {
 
             .item_title {
                 font-family: $Bold_font;
-                margin-bottom: 5px;
+                margin: 10px 0 3px 0;
             }
 
             .items {

@@ -1,11 +1,8 @@
-/* eslint-disable prefer-const */
-/* eslint-disable eqeqeq */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { AddToCart, totalBill } from '../../Redux/Action/Action'
 import '../../../Pages/Products/Products.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 
 function PopUp ({ flag, data, checkParent }) {
   const [count, setCount] = useState(1)
@@ -62,13 +59,7 @@ function PopUp ({ flag, data, checkParent }) {
     setOrderData({ ...perantName, totalCount: count, totalSum: itemsum, itemsmenu })
   }, [selectedcheckdata, count, printData])
 
-  // const addToOrder = () => {
-  //   dispatch(AddToCart(orderdata, cartData))
-  //   dispatch(totalBill(orderdata.totalSum))
-  //   flag()
-  // }
-
-  let appendData = []
+  const appendData = []
   const addToOrder = (data, cartData) => {
     if (cartData) {
       const I = cartData.findIndex((item) => item.id === data.id)
@@ -189,5 +180,11 @@ function PopUp ({ flag, data, checkParent }) {
       </div>
     </div>
   )
+}
+
+PopUp.propTypes = {
+  flag: PropTypes.func,
+  data: PropTypes.object,
+  checkParent: PropTypes.array
 }
 export default PopUp

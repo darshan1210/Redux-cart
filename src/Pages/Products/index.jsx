@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import './Products.scss'
 import Mainapi from '../../Shared/Utils/Utils'
@@ -16,7 +15,6 @@ function Product () {
   const [secondbtnactive, setSecondbtnactive] = useState(4)
   const [pupUpData, setPopUpData] = useState({})
   const [defultItems, setdefultItems] = useState({})
-  const [btnTitle, setBtnTitle] = useState()
 
   const totalBill = useSelector(state => state.TotalBill.data)
 
@@ -46,7 +44,6 @@ function Product () {
     const newtemp1 = categories.filter((element) => element.parent === id)
     setSecondparant(newtemp1)
     setdefultItems(newtemp1[0])
-    setBtnTitle(name)
   }
   function Secondclick (id) {
     setSecondbtnactive(id)

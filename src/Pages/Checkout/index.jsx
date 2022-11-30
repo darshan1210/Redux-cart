@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import './Checkout.scss'
 import { FiChevronLeft } from 'react-icons/fi'

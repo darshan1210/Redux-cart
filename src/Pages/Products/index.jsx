@@ -1,13 +1,13 @@
-/* eslint-disable react/prop-types */
+
 import React, { useEffect, useState } from 'react'
 import './Products.scss'
-// import Mainapi from '../../Shared/Utils/Utils'
 import PopUp from '../../Shared/Componet/popup-box'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { FaLanguage } from 'react-icons/fa'
 import Lang from '../../Shared/Componet/Languages'
 import { useTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 
 function Product ({ btndata, allitem }) {
   const [categories, SetCategories] = useState([])
@@ -130,5 +130,9 @@ function Product ({ btndata, allitem }) {
       </div>
     </div>
   )
+}
+Product.propTypes = {
+  btndata: PropTypes.array,
+  allitem: PropTypes.array
 }
 export default Product

@@ -15,7 +15,6 @@ function PopUp ({ flag, data, checkParent }) {
   const { t } = useTranslation()
 
   const cartData = useSelector(state => state.cartItems.data)
-
   const dispatch = useDispatch()
 
   function hendelchange (e) {

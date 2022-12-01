@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import '../../../Pages/Checkout/Checkout.scss'
 import thumb from '../../../assets/img/thumbs_up.png'
@@ -6,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { clearCart, clearTotal } from '../../Redux/Action/Action'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 
 function Confirm ({ flag }) {
   const dispatch = useDispatch()
@@ -34,6 +34,9 @@ function Confirm ({ flag }) {
         </div>
         </>
   )
+}
+Confirm.propTypes = {
+  flag: PropTypes.func
 }
 
 export default Confirm

@@ -13,5 +13,6 @@
     "tableNumber": "Table Number",
     "confirmMessage": "By placing this order you agree that you are present in Kings Arms and Over 18 years old",
     "cancel":"Cancel",
-    "placeOrder":"Place Order"
+    "placeOrder":"Place Order",
+    "YourCartisEmpty":"Your Cart is Empty"
   }

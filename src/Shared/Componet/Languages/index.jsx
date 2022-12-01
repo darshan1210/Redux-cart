@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import './language.scss'
+import PropTypes from 'prop-types'
 import { UserContext } from '../../../App'
 
 function Lang ({ flag }) {
@@ -17,5 +17,8 @@ function Lang ({ flag }) {
         </div>
         </>
   )
+}
+Lang.propTypes = {
+  flag: PropTypes.func
 }
 export default Lang

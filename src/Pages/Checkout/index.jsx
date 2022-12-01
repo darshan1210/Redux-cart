@@ -80,7 +80,7 @@ function Checkout () {
                 }
                 ))
               : (<div className='empty_cart'>
-                  <h3 >Your Cart is Empty</h3>
+                  <h3 >{t('YourCartisEmpty')}</h3>
               </div>)
             }
 

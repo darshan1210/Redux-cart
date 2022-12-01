@@ -43,6 +43,18 @@ body {
             align-items: center;
             margin: 2vh 0 5vh 0;
 
+            .language_btn{
+                background: $light_yellow;
+                padding: 5px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 6%;
+                top:7%;
+            }
+
             .heading {
                 font-weight: bold;
                 font-family: $Bold_font;

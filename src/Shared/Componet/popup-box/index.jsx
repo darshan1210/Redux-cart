@@ -3,6 +3,7 @@ import { AddToCart, totalBill } from '../../Redux/Action/Action'
 import '../../../Pages/Products/Products.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 
 function PopUp ({ flag, data, checkParent }) {
   const [count, setCount] = useState(1)
@@ -11,6 +12,7 @@ function PopUp ({ flag, data, checkParent }) {
   const [printData, setPrintData] = useState({})
   const [active, setActive] = useState('half pint')
   const [orderdata, setOrderData] = useState({})
+  const { t } = useTranslation()
 
   const cartData = useSelector(state => state.cartItems.data)
 
@@ -125,7 +127,7 @@ function PopUp ({ flag, data, checkParent }) {
               (variants) && (<>
                 <div className="Size_box">
                   <div className="size_title">
-                    Size
+                    {t('size')}
                   </div>
                   {variants.map((element, index) => {
                     const { name, price } = element
@@ -147,7 +149,7 @@ function PopUp ({ flag, data, checkParent }) {
               (extras) && (<>
                 <div className="Select_Options">
                   <div className="Select_Options_title">
-                    Select Options
+                    {t('selectOptions')}
                   </div>
                   {
                     extras.map((element, index) => {
@@ -172,7 +174,7 @@ function PopUp ({ flag, data, checkParent }) {
             <button className="plus" onClick={() => setCount(count + 1)}>+</button>
           </div>
           <div className="addtocart">
-            <button className="ADD_TO_ORDER" onClick={() => addToOrder(orderdata, cartData)} >ADD TO ORDER</button>
+            <button className="ADD_TO_ORDER" onClick={() => addToOrder(orderdata, cartData)} >{t('addToOrder')}</button>
           </div>
 
         </div>

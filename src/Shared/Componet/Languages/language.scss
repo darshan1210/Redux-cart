@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'Gilroy-Light';
+    src: local('Gilroy-Light'), url(../../../assets/Fonts/Gilroy/Gilroy-Light.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Gilroy-ExtraBold';
+    src: local('Gilroy-ExtraBold'), url(../../../assets/Fonts/Gilroy/Gilroy-ExtraBold.otf) format('truetype');
+}
+
+$Bold_font: 'Gilroy-ExtraBold', sans-serif;
+$light_font: 'Gilroy-Light', sans-serif;
+$dark_yellow: #fcd404;
+$light_yellow: #f8db45;
+
+
+.language_background{
+    position: absolute;
+    top:0;
+    background: rgba(0, 0, 0, 0.675);
+    height:100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .temp_back{
+        background: transparent;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top:0;
+    }
+    .laguages{
+        background: white;
+        display: flex;
+        flex-direction: column;
+        padding: 60px;
+        z-index: 1000;
+        border-radius: 20px;
+        font-family: $Bold_font;
+        position: relative;
+        .close_icon{
+            position: absolute;
+            right:20px;
+            top:15px;
+            border-radius: 50%;
+            font-family: $Bold_font;
+            font-weight: bold;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        button{
+            margin: 10px;
+            padding: 5px 20px 5px 20px;
+            border: 3px solid $dark_yellow;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            &:hover{
+                background:$light_yellow;
+            }
+            &:active{
+                background: $light_yellow;
+            }
+        }
+    }
+}

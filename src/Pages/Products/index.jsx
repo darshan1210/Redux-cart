@@ -5,6 +5,9 @@ import './Products.scss'
 import PopUp from '../../Shared/Componet/popup-box'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { FaLanguage } from 'react-icons/fa'
+import Lang from '../../Shared/Componet/Languages'
+import { useTranslation } from 'react-i18next'
 
 function Product ({ btndata, allitem }) {
   const [categories, SetCategories] = useState([])
@@ -12,10 +15,12 @@ function Product ({ btndata, allitem }) {
   const [secondParent, setSecondparant] = useState([])
   const [secondBtnData, setSecondBtnData] = useState([])
   const [pupupflag, setPopupflag] = useState(false)
+  const [languageflag, setLanguageFlag] = useState(false)
   const [firstbtnactive, setFirstbtnactive] = useState(2)
   const [secondbtnactive, setSecondbtnactive] = useState(4)
   const [pupUpData, setPopUpData] = useState({})
   const [defultItems, setdefultItems] = useState({})
+  const { t } = useTranslation()
 
   const totalBill = useSelector(state => state.TotalBill.data)
 
@@ -66,12 +71,17 @@ function Product ({ btndata, allitem }) {
     setPopUpData(data)
     setPopupflag(!pupupflag)
   }
+  function langpopup () {
+    setLanguageFlag(!languageflag)
+  }
   return (
     <div className='main_container'>
       <div className="app">
+
         <div className="header">
-          <span className='heading'>Kings Arms Cardington</span>
-          <span className='Street_address'>134 High Street, Kempston, Bedford, <br />Bedfordshire, MK42 7BN</span>
+          <span className='heading'>{t('restaurantName')}</span>
+          <div className="language_btn" onClick={() => langpopup()}><FaLanguage/></div>
+          <span className='Street_address'>{t('restaurantAddress1')} <br />{t('restaurantAddress2')}</span>
         </div>
         <div className="food_type">
           {categories.map((element, index) => {
@@ -108,13 +118,14 @@ function Product ({ btndata, allitem }) {
         </div>
 
         <div className="view_basket" onClick={() => { naviagte('/checkout') }}>
-          <div className="view_basket_title">view basket</div>
+          <div className="view_basket_title">{t('viewBasket')}</div>
           <span className="count_basket_view">
-          £ {totalPrice.toFixed(2)} / {totalItem} ITEM
+          £ {totalPrice.toFixed(2)} / {totalItem} {t('items')}
           </span>
         </div>
 
         {(pupupflag) && <PopUp flag={popupdata} data={pupUpData} checkParent={categories}/>}
+       {(languageflag) && <Lang flag={langpopup} />}
 
       </div>
     </div>

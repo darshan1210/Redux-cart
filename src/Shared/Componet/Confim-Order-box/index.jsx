@@ -5,10 +5,12 @@ import thumb from '../../../assets/img/thumbs_up.png'
 import { useDispatch } from 'react-redux'
 import { clearCart, clearTotal } from '../../Redux/Action/Action'
 import { useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
 function Confirm ({ flag }) {
   const dispatch = useDispatch()
   const naviagte = useNavigate()
+  const { t } = useTranslation()
   const EmptyCart = () => {
     dispatch(clearCart())
     dispatch(clearTotal())
@@ -19,14 +21,14 @@ function Confirm ({ flag }) {
         <>
             <div className="confirm_order_page">
           <div className="main_confirm_order">
-            <div className="confirm_order_title">Confirm Order</div>
+            <div className="confirm_order_title">{t('confirmOrder')}</div>
             <img className='thumb_up' src={thumb} alt="" />
             <div className="Confirm_description">
-                By placing this order you agree that you are present in Kings Arms and over 18 years old.
+               {t('confirmMessage')}
             </div>
             <div className="final_btns">
-                <button className="cancel_btn" onClick={flag}>cancel</button>
-                <button className="place_order" onClick={EmptyCart}>place order</button>
+                <button className="cancel_btn" onClick={flag}>{t('cancel')}</button>
+                <button className="place_order" onClick={EmptyCart}>{t('placeOrder')}</button>
             </div>
           </div>
         </div>

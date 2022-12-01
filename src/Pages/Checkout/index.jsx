@@ -5,6 +5,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Confirm from '../../Shared/Componet/Confim-Order-box'
+import { useTranslation } from 'react-i18next'
 
 function Checkout () {
   const naviagte = useNavigate()
@@ -13,6 +14,7 @@ function Checkout () {
   const [totalPrice, setTotalPrice] = useState((totalBill) || 0)
   const [totalItem, setTotalItem] = useState(0)
   const cartItems = useSelector(state => state.cartItems.data)
+  const { t } = useTranslation()
   function ConfirmOrder () {
     setOrderFlag(!orderFlag)
   }
@@ -34,7 +36,7 @@ function Checkout () {
               <FiChevronLeft />
             </span>
             <span className="page_heading">
-              Checkout
+              {t('checkout')}
             </span>
             <span className="three_dot">
               <HiOutlineDotsHorizontal />
@@ -44,7 +46,7 @@ function Checkout () {
             Kempston Hammers Sports & Social Club
           </div>
           <div className="Checkout_page_discription">
-            134 High Street, Kempston, Bedford, <br />Bedfordshire, MK42 7BN
+            {t('restaurantAddress1')} <br />{t('restaurantAddress2')}
           </div>
 
           <div className="cart_items">
@@ -88,7 +90,7 @@ function Checkout () {
 
           <div className="add_notes">
             <div className="add_notes_title">
-              Add notes:
+            {t('addNotes')}
             </div>
             <textarea className='add_notes_box' type="textareas" name="text" />
           </div>
@@ -97,16 +99,16 @@ function Checkout () {
 
           <div className="Table_number">
             <div>
-              <span className="Table_number_title">Table Number</span>
+              <span className="Table_number_title">{t('tableNumber')}:</span>
               <span className="table_number">32</span>
             </div>
           </div>
 
             {
               (cartItems !== undefined && cartItems.length !== 0) && (<div className="Confirm_order" onClick={() => ConfirmOrder()}>
-              <div className="Confirm_order_title">confirm order</div>
+              <div className="Confirm_order_title">{t('confirmOrder')}</div>
               <span className="Confirm_order_view">
-                £ {totalPrice.toFixed(2)} /  {totalItem} ITEM
+                £ {totalPrice.toFixed(2)} /  {totalItem} {t('items')}
               </span>
             </div>)
             }

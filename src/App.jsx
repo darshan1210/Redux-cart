@@ -5,7 +5,42 @@ import Checkout from './Pages/Checkout'
 import Load from './Pages/Loader'
 import Product from './Pages/Products'
 import Mainapi from './Shared/Utils/Utils'
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import tEn from './assets/locales/en/translation.json'
+import tGu from './assets/locales/gu/translation.json'
+import tHi from './assets/locales/hi/translation.json'
 
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: {
+        translation: tEn
+      },
+      gu: {
+        translation: tGu
+      },
+      hi: {
+        translation: tHi
+      }
+    },
+    lng: 'en',
+    fallbackLng: 'en',
+
+    interpolation: {
+      escapeValue: false
+    }
+  })
+
+const changeLang = (l) => {
+  return () => {
+    console.log('darshan')
+    i18n.changeLanguage(l)
+    localStorage.setItem('lang', l)
+  }
+}
+export const UserContext = React.createContext()
 function App () {
   const [activePage, setActivePage] = useState(true)
   const [btnData, setBtnData] = useState()
@@ -20,10 +55,13 @@ function App () {
     const loadTime = setTimeout(() => {
       setActivePage(false)
     }, 1000)
+    const currentLang = localStorage.getItem('lang')
+    i18n.changeLanguage(currentLang)
     return () => clearTimeout(loadTime)
   }, [])
+
   return (
-    <>
+    <UserContext.Provider value={changeLang}>
       {
         (activePage)
           ? (<Load />)
@@ -37,7 +75,7 @@ function App () {
             )
       }
 
-    </>
+    </UserContext.Provider>
   )
 }
 

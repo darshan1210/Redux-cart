@@ -8,8 +8,11 @@ import { FaLanguage } from 'react-icons/fa'
 import Lang from '../../Shared/Componet/Languages'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function Product ({ btndata, allitem }) {
+  const [activePage, setActivePage] = useState(true)
   const [categories, SetCategories] = useState([])
   const [products, SetProducts] = useState([])
   const [secondParent, setSecondparant] = useState([])
@@ -74,6 +77,12 @@ function Product ({ btndata, allitem }) {
   function langpopup () {
     setLanguageFlag(!languageflag)
   }
+  useEffect(() => {
+    const loadTime = setTimeout(() => {
+      setActivePage(false)
+    }, 3000)
+    return () => clearTimeout(loadTime)
+  }, [])
   return (
     <div className='main_container'>
       <div className="app">
@@ -83,39 +92,52 @@ function Product ({ btndata, allitem }) {
           <div className="language_btn" onClick={() => langpopup()}><FaLanguage/></div>
           <span className='Street_address'>{t('restaurantAddress1')} <br />{t('restaurantAddress2')}</span>
         </div>
-        <div className="food_type">
+        {
+          (activePage)
+            ? <div className="skeleton"> <Skeleton height={35}/></div>
+            : <div className="food_type">
           {categories.map((element, index) => {
             const { id, name } = element
             return ((element.parent == null) && <button key={index} onClick={() => Firstclick(id, name)} className={firstbtnactive === id ? 'MainActive' : 'food_type_btn'} >{name}</button>)
           })}
         </div>
-        <div className="stater_type">
-          {
-            secondParent.map((element, index) => {
-              const { id, name } = element
-              return (<button key={index} className={secondbtnactive === id ? 'MainActiveBtn2' : 'stater_type_btn'} onClick={() => Secondclick(id)}>{name} </button>)
-            })
-          }
-        </div>
-        <div>{(secondBtnData.length !== 0)
-          ? (secondBtnData.map((element, index) => {
-              const { name, description, price } = element
-              return (
-                <div className="product_info" key={index} onClick={() => popupdata(element)}>
-                  <div className="product_info_left">
-                    <span className="product_title">{name}</span>
-                    <span className="product_Discription">{description}</span>
-                  </div>
-                  <div className="product_info_right">
-                    <span className="product_prize">£ {price}</span>
-                  </div>
-                </div>
-              )
-            }))
-          : (<h4 className="product_info" >This item is not Available</h4>)
-          }
+        }
 
-        </div>
+        {
+          (activePage)
+            ? <div className="skeleton"> <Skeleton height={25}/></div>
+            : <div className="stater_type">
+            {
+              secondParent.map((element, index) => {
+                const { id, name } = element
+                return (<button key={index} className={secondbtnactive === id ? 'MainActiveBtn2' : 'stater_type_btn'} onClick={() => Secondclick(id)}>{name} </button>)
+              })
+            }
+          </div>
+        }
+
+{
+          (activePage)
+            ? <div className="skeleton2"> <Skeleton height={60}/>  <Skeleton height={60}/></div>
+            : <div>{(secondBtnData.length !== 0)
+              ? (secondBtnData.map((element, index) => {
+                  const { name, description, price } = element
+                  return (
+                    <div className="product_info" key={index} onClick={() => popupdata(element)}>
+                      <div className="product_info_left">
+                        <span className="product_title">{name}</span>
+                        <span className="product_Discription">{description}</span>
+                      </div>
+                      <div className="product_info_right">
+                        <span className="product_prize">£ {price}</span>
+                      </div>
+                    </div>
+                  )
+                }))
+              : (<h4 className="product_info" >This item is not Available</h4>)
+              }
+            </div>
+        }
 
         <div className="view_basket" onClick={() => { naviagte('/checkout') }}>
           <div className="view_basket_title">{t('viewBasket')}</div>

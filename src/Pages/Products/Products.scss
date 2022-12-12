@@ -36,7 +36,17 @@ body {
         background-color: white;
         padding: 0 0px 0 0px;
         position: relative;
-
+            .skeleton{
+                padding: 0 15px 0 15px;
+                margin-bottom: 25px;
+            }
+            .skeleton2{
+                padding: 0 15px 0 15px;
+                margin-bottom: 25px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
         .header {
             display: flex;
             flex-direction: column;
